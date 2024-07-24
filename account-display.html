@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #cde7f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 800px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background: #007BFF;
+            color: white;
+        }
+        .actions {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 10px;
+        }
+        .actions button {
+            width: auto;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Account Ledger</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Account Name</th>
+                    <th>Description</th>
+                    <th>Debit</th>
+                    <th>Credit</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody id="entriesTable">
+            </tbody>
+        </table>
+        <div class="actions">
+            <button onclick="window.location.href='account-entry.html'">Back</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const entries = JSON.parse(localStorage.getItem('entries')) || [];
+            const tableBody = document.getElementById('entriesTable');
+            let balance = 0;
+
+            entries.forEach(entry => {
+                const row = document.createElement('tr');
+                const debit = entry.debit ? parseFloat(entry.debit) : 0;
+                const credit = entry.credit ? parseFloat(entry.credit) : 0;
+                balance += debit - credit;
+
+                row.innerHTML = `
+                    <td>${new Date().toLocaleDateString()}</td>
+                    <td>${entry.accountName}</td>
+                    <td>${entry.remarks}</td>
+                    <td>${debit.toFixed(2)}</td>
+                    <td>${credit.toFixed(2)}</td>
+                    <td>${balance.toFixed(2)}</td>
+                `;
+
+                tableBody.appendChild(row);
+            });
+        });
+    </script>
+</body>
+</html>
