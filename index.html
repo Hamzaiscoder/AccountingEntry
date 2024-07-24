@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Voucher</title>
+    <title>Expense Account Entry</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,7 +37,7 @@
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
-margin: 10px 0;
+            margin: 10px 0;
             border-radius: 5px;
         }
         button {
@@ -65,30 +65,14 @@ margin: 10px 0;
 </head>
 <body>
     <div class="container">
-        <h2>Payment Voucher</h2>
+        <h2>Expense Account Entry</h2>
         <div class="form-group">
-            <label for="voucherCode">Voucher Code</label>
-            <input type="text" id="voucherCode" placeholder="Voucher Code">
-        </div>
-        <div class="form-group">
-            <label for="voucherDate">Voucher Date</label>
+            <label for="voucherDate">Date</label>
             <input type="date" id="voucherDate">
         </div>
-        <!-- <div class="form-group">
-            <label for="chequeDate">Cheque Date</label>
-            <input type="date" id="chequeDate">
-        </div>
-        <div class="form-group">
-            <label for="chequeNumber">Cheque Number</label>
-            <input type="text" id="chequeNumber" placeholder="Cheque Number">
-        </div> -->
         <div class="form-group">
             <label for="description">Description</label>
             <input type="text" id="description" placeholder="Description">
-        </div>
-        <div class="form-group">
-            <label for="company">Company</label>
-            <input type="text" id="company" placeholder="Company">
         </div>
         <table>
             <thead>
@@ -105,11 +89,8 @@ margin: 10px 0;
                     <td>1</td>
                     <td>
                         <select>
-                            <option value="hamza">Hamza</option>
                             <option value="cash">Cash</option>
-                            <option value="bank">Bank</option>
-                            <option value="sale">Sale</option>
-                            <option value="purchase">Purchase</option>
+                            <option value="expense">Expense</option>
                         </select>
                     </td>
                     <td><input type="number" placeholder="Debit"></td>
@@ -142,11 +123,8 @@ margin: 10px 0;
             cell1.innerHTML = rowCount + 1;
             cell2.innerHTML = `
                 <select>
-                    <option value="hamza">Hamza</option>
                     <option value="cash">Cash</option>
-                    <option value="bank">Bank</option>
-                    <option value="sale">Sale</option>
-                    <option value="purchase">Purchase</option>
+                    <option value="expense">Expense</option>
                 </select>
             `;
             cell3.innerHTML = '<input type="number" placeholder="Debit">';
@@ -172,18 +150,23 @@ margin: 10px 0;
             alert('Entries saved successfully!');
         }
 
-        // function editEntry() {
-        //     alert('Edit functionality not implemented yet.');
-        // }
+        function editEntry() {
+            alert('Edit functionality not implemented yet.');
+        }
 
-        // function deleteEntry() {
-        //     const table = document.getElementById('entriesTable');
-        //     if (table.rows.length > 1) {
-        //         table.deleteRow(table.rows.length - 1);
-        //     } else {
-        //         alert('Cannot delete all rows.');
-        //     }
-        // }
+        function deleteEntry() {
+            const table = document.getElementById('entriesTable');
+            if (table.rows.length > 1) {
+                table.deleteRow(table.rows.length - 1);
+            } else {
+                alert('Cannot delete all rows.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('voucherDate').value = today;
+        });
     </script>
 </body>
 </html>
