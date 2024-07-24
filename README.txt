@@ -1,0 +1,1 @@
+This is Account Entry page where entry save in localStorage and dsplay in ledger.
